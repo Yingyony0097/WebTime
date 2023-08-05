@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>New Year Countdown</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+        }
+        h1 {
+            font-size: 48px;
+        }
+        #countdown {
+            font-size: 36px;
+            margin-top: 30px;
+        }
+        p{ font-family: Phetsarath OT;
+          font-weight: 200;
+
+        }
+    </style>
+</head>
+<body>
+    <h1>New Year Countdown</h1>
+    <div id="countdown"></div>
+
+    <script>
+        // Set the target date to New Year's Eve of the next year
+        const targetDate = new Date(new Date().getFullYear() + 1, 0, 1);
+
+        // Update the countdown every second
+        const countdownTimer = setInterval(updateCountdown, 1000);
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            // Calculate days, hours, minutes, and seconds remaining
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the countdown
+            const countdownElement = document.getElementById("countdown");
+            countdownElement.innerHTML = `<p>${days} ວັນ ${hours} ຊົ່ວໂມງ ${minutes} ນາທີ ${seconds} ວິນາທີ </p>`;
+
+            // If the countdown is over, clear the interval
+            if (distance < 0) {
+                clearInterval(countdownTimer);
+                countdownElement.innerHTML = "Happy New Year!";
+            }
+        }
+    </script>
+</body>
+</html>
